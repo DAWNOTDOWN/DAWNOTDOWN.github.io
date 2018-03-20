@@ -10,9 +10,9 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/ren_favicon.ico">
 
-    <title>朝晨博客 | Zhaochen Blog</title>
+    <title>Study the grammar of Markdown - 朝晨博客 | Zhaochen Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/">
+    <link rel="canonical" href="http://localhost:4000/2016/11/29/markdown-grammar/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -123,165 +123,329 @@
 </script>
 
 
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/ren_home-bg.jpg')">
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/Study1.png" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/Study1.png')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Zhaochen Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">做个有趣的人类。</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Markdown" title="Markdown">Markdown</a>
+                        
+                    </div>
+                    <h1>Study the grammar of Markdown</h1>
+                    
+                    
+                    <h2 class="subheading">MARKDOWN</h2>
+                    
+                    <span class="meta">Posted by DAWNOTDOWN on November 29, 2016</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-        
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-    			
-<div class="post-preview">
-    <a href="/2016/11/29/markdown-grammar/">
-        <h2 class="post-title">
-            Study the grammar of Markdown
-        </h2>
-        
-        <h3 class="post-subtitle">
-            MARKDOWN
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  ”#”的数目表示从标题1到6阶，最高6个”#”符号
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
+				<blockquote>
+  <p>”#”的数目表示从标题1到6阶，最高6个”#”符号</p>
+</blockquote>
 
-#test
+<div class="highlighter-rouge"><pre class="highlight"><code>#test
 ##test//二级标题下会有一根分割线
 ###test 
 ####test
 #####test
 ######test//六级标题颜色会变浅
+</code></pre>
+</div>
 
-
-
-#test
+<p>#test
 ##test
 ###test
 ####test
 #####test
-######test
+######test</p>
 
+<blockquote>
+  <p>”=”号和”-“号可以表示标题1到2阶，不限制这两个符号的使用次数</p>
+</blockquote>
 
-  ”=”号和”-“号可以表示标题1到2阶，不限制这两个符号的使用...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by DAWNOTDOWN on November 29, 2016
-    </p>
+<div class="highlighter-rouge"><pre class="highlight"><code>This is an H1
+=============
+
+This is an H2
+-------
+</code></pre>
 </div>
-<hr>
 
-<div class="post-preview">
-    <a href="/2016/11/29/first-blog/">
-        <h2 class="post-title">
-            First blog contribute to LIFE
-        </h2>
-        
-        <h3 class="post-subtitle">
-            如果你现在过不好，以后怎么能过好
-        </h3>
-        
-        <div class="post-content-preview">
-            
-  “Yeah It’s a good start.”
+<h1 id="this-is-an-h1">This is an H1</h1>
 
+<h2 id="this-is-an-h2">This is an H2</h2>
 
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by DAWNOTDOWN on November 29, 2016
-    </p>
+<blockquote>
+  <p>使用”*“符号和”_“符号来标记需要强调的区段</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>*test*
+**test**
+***test***
+</code></pre>
 </div>
-<hr>
+<p><em>test</em></p>
+
+<p><strong>test</strong></p>
+
+<p><strong><em>test</em></strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>_test_
+__test__
+___test___
+</code></pre>
+</div>
+
+<p><em>test</em></p>
+
+<p><strong>test</strong></p>
+
+<p><strong><em>test</em></strong></p>
+
+<blockquote>
+  <p>列表</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>* 列表1
+* 列表2
+* 列表3
+</code></pre>
+</div>
+
+<ul>
+  <li>列表1</li>
+  <li>列表2</li>
+  <li>列表3</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>+ 列表1
++ 列表2
++ 列表3
+</code></pre>
+</div>
+
+<ul>
+  <li>列表1</li>
+  <li>列表2</li>
+  <li>列表3</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- 列表1
+- 列表2
+- 列表3
+</code></pre>
+</div>
+
+<ul>
+  <li>列表1</li>
+  <li>列表2</li>
+  <li>列表3</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1. 列表1
+2. 列表2
+3. 列表3
+</code></pre>
+</div>
+
+<ol>
+  <li>列表1</li>
+  <li>列表2</li>
+  <li>列表3</li>
+</ol>
+
+<blockquote>
+  <p>链接</p>
+</blockquote>
+
+<p><strong>行内形式</strong></p>
+
+<p><code class="highlighter-rouge">This is an [这是一个链接](http://example.com/)</code></p>
+
+<p>This is an <a href="http://example.com/">这是一个链接</a></p>
+
+<p><code class="highlighter-rouge">This is an [这是一个链接](http://example.com/ "With a Title")</code></p>
+
+<p>This is an <a href="http://example.com/" title="With a Title">这是一个链接</a></p>
+
+<p><strong>参考形式</strong></p>
+
+<p>This is an example from <a href="http://www.baidu.com/" title="Baidu">Baidu</a>,<a href="http://www.qq.com/">QQ</a></p>
+
+<p><code class="highlighter-rouge">[1]:http://www.baidu.com/ "Baidu"</code></p>
+
+<p><code class="highlighter-rouge">[qq]:http://www.qq.com/</code></p>
+
+<blockquote>
+  <p>图片</p>
+</blockquote>
+
+<p><strong>行内形式</strong></p>
+
+<pre><code class="language-![图片1](../img/ren_icon_wechat.png)```">
+![图片1](../img/ren_icon_wechat.png)
+
+```![图片2](../img/ren_icon_wechat.png "alt text")```
+
+![图片2](../img/ren_icon_wechat.png "alt text")
+
+```![图片3](https://dawnotdown.github.io/img/ren_avatar-zhaochen.png "图片3")```
+
+![图片3](https://dawnotdown.github.io/img/ren_avatar-zhaochen.png "图片3")
+
+**参考形式**
 
 
-<!-- Pager -->
+```This is ![an example][id] reference-style link.```
+
+```[id]: https://dawnotdown.github.io/img/ren_avatar-zhaochen.png "图片3"```
 
 
-    		</div>
+This is ![an example][id] reference-style link.
+
+[id]: https://dawnotdown.github.io/img/ren_avatar-zhaochen.png "图片3"
+
+
+
+&gt;取消HTML显示
+
+使用符号"`"，连写3次，在行的首与尾或段的头与尾
+
+
+&gt;支持大部分HTML语法
+
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Foo&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;UFO&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+
+&gt;Markdown 会自动转化&lt;符号与&amp;符号
+
+```&lt; → &amp;lt;```
+
+```&amp; → &amp;amp;```
+
+&gt;特殊
+
+**取消列表显示**
+
+```1986. What a great season.```
+
+1986. What a great season.
+
+```1986\. What a great season.```
+
+1986\. What a great season.
+
+&gt;分割线
+
+```***```
+***
+
+```* * *```
+* * *
+
+```---```
+___
+
+```---```
+
+---
+
+&gt;反斜杠
+
+</code></pre>
+<p>\   反斜线
+`   反引号</p>
+<ul>
+  <li>星号
+_   底线
+{}  花括号
+[]  方括号
+()  括弧
+    <h1 id="井字号">井字号</h1>
+  </li>
+  <li>加号</li>
+  <li>减号
+.   英文句点
+!   惊叹号
+```</li>
+</ul>
+
+
+                <hr>
+
+                
+
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2016/11/29/first-blog/" data-toggle="tooltip" data-placement="top" title="First blog contribute to LIFE">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+
+                
+
+                
+
+            </div>
+
     <!-- Sidebar Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
+        				
                             
-                        
+        				
                             
-                        
-                    </div>
+        				
+        			</div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-                        
-                            <img src="/img/ren_avatar-zhaochen.png" />
-                        
-                        
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-                            
-                            <li>
-                                <a target="_blank" href="http://weibo.com/ha100022628">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                            
-                            
-                            <li>
-                                <a target="_blank" href="https://github.com/dawnotdown">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </section>
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -294,10 +458,52 @@
                     
                 </ul>
                 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

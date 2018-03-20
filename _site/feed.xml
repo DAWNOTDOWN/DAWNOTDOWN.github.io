@@ -5,9 +5,257 @@
     <description>做个有趣的人类。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 29 Nov 2016 11:59:39 +0800</pubDate>
-    <lastBuildDate>Tue, 29 Nov 2016 11:59:39 +0800</lastBuildDate>
+    <pubDate>Fri, 02 Dec 2016 22:30:07 +0800</pubDate>
+    <lastBuildDate>Fri, 02 Dec 2016 22:30:07 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>Study the grammar of Markdown</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;”#”的数目表示从标题1到6阶，最高6个”#”符号&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#test
+##test//二级标题下会有一根分割线
+###test 
+####test
+#####test
+######test//六级标题颜色会变浅
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;#test
+##test
+###test
+####test
+#####test
+######test&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;”=”号和”-“号可以表示标题1到2阶，不限制这两个符号的使用次数&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;This is an H1
+=============
+
+This is an H2
+-------
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;this-is-an-h1&quot;&gt;This is an H1&lt;/h1&gt;
+
+&lt;h2 id=&quot;this-is-an-h2&quot;&gt;This is an H2&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;使用”*“符号和”_“符号来标记需要强调的区段&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;*test*
+**test**
+***test***
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;test&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;test&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_test_
+__test__
+___test___
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;test&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;test&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;test&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;列表&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* 列表1
+* 列表2
+* 列表3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;列表1&lt;/li&gt;
+  &lt;li&gt;列表2&lt;/li&gt;
+  &lt;li&gt;列表3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+ 列表1
++ 列表2
++ 列表3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;列表1&lt;/li&gt;
+  &lt;li&gt;列表2&lt;/li&gt;
+  &lt;li&gt;列表3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- 列表1
+- 列表2
+- 列表3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;列表1&lt;/li&gt;
+  &lt;li&gt;列表2&lt;/li&gt;
+  &lt;li&gt;列表3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. 列表1
+2. 列表2
+3. 列表3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;列表1&lt;/li&gt;
+  &lt;li&gt;列表2&lt;/li&gt;
+  &lt;li&gt;列表3&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;链接&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;行内形式&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;This is an [这是一个链接](http://example.com/)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This is an &lt;a href=&quot;http://example.com/&quot;&gt;这是一个链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;This is an [这是一个链接](http://example.com/ &quot;With a Title&quot;)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This is an &lt;a href=&quot;http://example.com/&quot; title=&quot;With a Title&quot;&gt;这是一个链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;参考形式&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This is an example from &lt;a href=&quot;http://www.baidu.com/&quot; title=&quot;Baidu&quot;&gt;Baidu&lt;/a&gt;,&lt;a href=&quot;http://www.qq.com/&quot;&gt;QQ&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[1]:http://www.baidu.com/ &quot;Baidu&quot;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[qq]:http://www.qq.com/&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;图片&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;行内形式&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-![图片1](../img/ren_icon_wechat.png)```&quot;&gt;
+![图片1](../img/ren_icon_wechat.png)
+
+```![图片2](../img/ren_icon_wechat.png &quot;alt text&quot;)```
+
+![图片2](../img/ren_icon_wechat.png &quot;alt text&quot;)
+
+```![图片3](https://dawnotdown.github.io/img/ren_avatar-zhaochen.png &quot;图片3&quot;)```
+
+![图片3](https://dawnotdown.github.io/img/ren_avatar-zhaochen.png &quot;图片3&quot;)
+
+**参考形式**
+
+
+```This is ![an example][id] reference-style link.```
+
+```[id]: https://dawnotdown.github.io/img/ren_avatar-zhaochen.png &quot;图片3&quot;```
+
+
+This is ![an example][id] reference-style link.
+
+[id]: https://dawnotdown.github.io/img/ren_avatar-zhaochen.png &quot;图片3&quot;
+
+
+
+&amp;gt;取消HTML显示
+
+使用符号&quot;`&quot;，连写3次，在行的首与尾或段的头与尾
+
+
+&amp;gt;支持大部分HTML语法
+
+&amp;lt;table&amp;gt;
+    &amp;lt;tr&amp;gt;
+        &amp;lt;td&amp;gt;Foo&amp;lt;/td&amp;gt;
+    &amp;lt;/tr&amp;gt;
+    &amp;lt;tr&amp;gt;
+        &amp;lt;td&amp;gt;UFO&amp;lt;/td&amp;gt;
+    &amp;lt;/tr&amp;gt;
+&amp;lt;/table&amp;gt;
+
+&amp;gt;Markdown 会自动转化&amp;lt;符号与&amp;amp;符号
+
+```&amp;lt; → &amp;amp;lt;```
+
+```&amp;amp; → &amp;amp;amp;```
+
+&amp;gt;特殊
+
+**取消列表显示**
+
+```1986. What a great season.```
+
+1986. What a great season.
+
+```1986\. What a great season.```
+
+1986\. What a great season.
+
+&amp;gt;分割线
+
+```***```
+***
+
+```* * *```
+* * *
+
+```---```
+___
+
+```---```
+
+---
+
+&amp;gt;反斜杠
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;\   反斜线
+`   反引号&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;星号
+_   底线
+{}  花括号
+[]  方括号
+()  括弧
+    &lt;h1 id=&quot;井字号&quot;&gt;井字号&lt;/h1&gt;
+  &lt;/li&gt;
+  &lt;li&gt;加号&lt;/li&gt;
+  &lt;li&gt;减号
+.   英文句点
+!   惊叹号
+```&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 29 Nov 2016 08:01:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/29/markdown-grammar/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/29/markdown-grammar/</guid>
+        
+        <category>Markdown</category>
+        
+        
+      </item>
     
       <item>
         <title>First blog contribute to LIFE</title>
@@ -16,8 +264,8 @@
 &lt;/blockquote&gt;
 </description>
         <pubDate>Tue, 29 Nov 2016 08:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/29/firstblog/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/29/firstblog/</guid>
+        <link>http://localhost:4000/2016/11/29/first-blog/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/29/first-blog/</guid>
         
         <category>生活</category>
         
