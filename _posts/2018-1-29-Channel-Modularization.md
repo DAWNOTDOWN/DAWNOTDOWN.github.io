@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:      "mobileYY_Channel-ModularizationLoad"
+title:      "mobileYY_Channel-Modularization"
 subtitle:   "手Y直播间组件化"
 date:       2018-1-29 00:00:00
 author:     "DAWNOTDOWN"
-header-img: "img/post-bg-mobileYY-Channel-ModularizationLoad.jpg"
+header-img: "img/post-bg-mobileYY-Channel-Modularization.jpg"
 tags:
     - 原创
     - iOS开发
@@ -23,7 +23,7 @@ tags:
 3.视频流与直播间  
 视频流不依赖于直播间，可能正在进频道的过程时就已经开始走视频流拉取流程。比如开播端  
 4.直播间主播和首麦  
-直播间的主播指的就是当前在首麦的用户，它不一定是该直播间的拥有者，也不一定是当前直播间的视频流上传者，麦序是麦序，视频流是视频流。，比如YY交友业务里的乱斗玩法，首麦和次麦两路流都上传，观众侧看到的可能是次麦  
+直播间的主播指的就是当前在首麦的用户，它不一定是该直播间的拥有者，也不一定是当前直播间的视频流上传者，麦序是麦序，视频流是视频流。比如YY交友业务里的乱斗玩法，首麦和次麦两路流都上传，观众侧看到的可能是次麦  
 5.进频道与频道切换  
 ​进频道是需要登录的，没登录账号就能进直播间是因为使用了匿名账号登录，当登录账号或者切换账号时，需要退出直播间然后重新进一次直播间。当然，在一个频道里切换子频道也是需要这样操作  
 ...  
@@ -58,7 +58,7 @@ tags:
 ​等等，大概有5 60种...
 ​
 ​  
-# 直播间的组件化加载
+# 直播间的组件化
 手Y的直播间按使用人群分可分为两类，观看端和开播端；按模式分可分为至少三类，麦序模式，主席模式，自由模式；按模板分可分为开播端模板，娱乐模板，游戏模板，抓娃娃模板等等。不同的端，不同的模式，不同的模板，会加载不同的业务；不同的业务，拥有不同的view，各个view之间有业务上的交互，还有view之间的约束依赖。  
 现有业务在小小的屏幕上占一个坑，以后的业务又还想再进来。旧的模板满足不了日益增多的功能，新的模板又需要兼容一部分旧的模板。  
 基于模板和模式的手Y直播间加载各个业务view，采用了组件化的方式，重点考虑了以下几个要素：      
@@ -86,8 +86,8 @@ tags:
 
 ### 组件加载
 这里拿观众端娱乐模板+麦序模式举起一个栗子
-![图片1](/img/mobileYY-Channel-modularizationLoad.png)
-完整随时更新的图可点这里→[我叫图](https://www.processon.com/view/link/5aafe49be4b0e935339228b5) 
+![图片1](/img/mobileYY-Channel-modularization.png)
+也可点这里→[图](https://www.processon.com/view/link/5aafe49be4b0e935339228b5) 
  
 大概流程如下：  
 1.娱乐模板YYEChannelTemplateController的super YYBaseChannelViewController    
@@ -105,6 +105,9 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
 
 ### 层级关系
 上图已有，拿出来再说一下
-![图片2](/img/mobileYY-Channel-modularizationLoad_hierarchy.jpg)
+![图片2](/img/mobileYY-Channel-modularization_hierarchy.jpg)
 
 ViewController的有三个view，分别是ChannelVC的self.view，self.contentView和self.modalView。默认情况下，组件是加载到contentView中，modalView一般用来显示直播间的弹框等模态的view，而且一些组件比如onlineListModuleView，因为他覆盖在整个直播间上，相当于push了一个新的vc，所以也加载了modalView中。 
+
+
+>组件化使得各业务可以独立处理，相互之间耦合程度大大降低。各业务View在moduleLoader和layoutLoader的配合下加载，可以方便的设置,修改和新增。各业务逻辑集中在ModuleView和ViewModel内部，如果业务组件间需要交互，通过抛通知的方式或者GetCore注册调用或单例的方式拿
