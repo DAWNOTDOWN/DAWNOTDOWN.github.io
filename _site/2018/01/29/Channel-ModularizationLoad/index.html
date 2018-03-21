@@ -12,7 +12,7 @@
 
     <title>mobileYY_Channel-ModularizationLoad - 朝晨博客 | Zhaochen Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/2017/01/29/Channel-ModularizationLoad/">
+    <link rel="canonical" href="http://localhost:4000/2018/01/29/Channel-ModularizationLoad/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -148,7 +148,7 @@
                     
                     <h2 class="subheading">手Y直播间组件化</h2>
                     
-                    <span class="meta">Posted by DAWNOTDOWN on January 29, 2017</span>
+                    <span class="meta">Posted by DAWNOTDOWN on January 29, 2018</span>
                 </div>
             </div>
         </div>
@@ -245,7 +245,7 @@
 
 <p>###组件加载
 这里拿观众端娱乐模板+麦序模式举起一个栗子
-<img src="/img/mobileYY-Channel-ModularizationLoad.png" alt="图片1" />
+<img src="/img/mobileYY-Channel-modularizationLoad.png" alt="图片1" />
 完整随时更新的图可点这里→<a href="https://www.processon.com/view/link/5aafe49be4b0e935339228b5">我叫图</a></p>
 
 <p>大概流程如下：<br />
@@ -263,7 +263,7 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
 
 <p>###层级关系
 上图已有，拿出来再说一下
-<img src="/img/mobileYY-Channel-ModularizationLoad_hierarchy.jpg" alt="图片2" /></p>
+<img src="/img/mobileYY-Channel-modularizationLoad_hierarchy.jpg" alt="图片2" /></p>
 
 <p>ViewController的有三个view，分别是ChannelVC的self.view，self.contentView和self.modalView。默认情况下，组件是加载到contentView中，modalView一般用来显示直播间的弹框等模态的view，而且一些组件比如onlineListModuleView，因为他覆盖在整个直播间上，相当于push了一个新的vc，所以也加载了modalView中。</p>
 
