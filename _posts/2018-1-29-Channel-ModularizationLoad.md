@@ -11,8 +11,7 @@ tags:
 
 >"来YY快1年了,也做了很多直播间内的业务，今天介绍一下我们正在优化的手Y直播间的组件化加载"  
 
-
-##手Y的直播间##
+# 手Y的直播间  
 手Y的直播间本质上就是YY的频道，进直播间等同于先进了某个频道，对开播侧的主播来说也是如此，然后再实现频道内的几乎所有功能，频道是直播间的一个剥离具体业务的抽象。 
  
 **手Y直播间需要有PC频道物理相关的所有功能:**  
@@ -59,7 +58,7 @@ tags:
 ​等等，大概有5 60种...
 ​
 ​  
-##直播间的组件化加载##
+# 直播间的组件化加载
 手Y的直播间按使用人群分可分为两类，观看端和开播端；按模式分可分为至少三类，麦序模式，主席模式，自由模式；按模板分可分为开播端模板，娱乐模板，游戏模板，抓娃娃模板等等。不同的端，不同的模式，不同的模板，会加载不同的业务；不同的业务，拥有不同的view，各个view之间有业务上的交互，还有view之间的约束依赖。  
 现有业务在小小的屏幕上占一个坑，以后的业务又还想再进来。旧的模板满足不了日益增多的功能，新的模板又需要兼容一部分旧的模板。  
 基于模板和模式的手Y直播间加载各个业务view，采用了组件化的方式，重点考虑了以下几个要素：      
@@ -71,7 +70,7 @@ tags:
   
 所以，我们重新设计了直播间的组件化加载方式。  
 
-### 一个组件 ###
+### 一个组件
 一个组件至少需要以下部分：  
 1.组件的View及其业务逻辑  
 2.组件的布局  
@@ -85,7 +84,7 @@ tags:
 7.ModuleStatistic:NSObject <IModuleStatistic>，数据上报使用  
 8.Views，是组件所用到的自定义SubViews
 
-### 组件加载 ###
+### 组件加载
 这里拿观众端娱乐模板+麦序模式举起一个栗子
 ![图片1](/img/mobileYY-Channel-modularizationLoad.png)
 完整随时更新的图可点这里→[我叫图](https://www.processon.com/view/link/5aafe49be4b0e935339228b5) 
@@ -104,7 +103,7 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
 9.YYChannelModeLoader继续加载，遍历剩下的defaultModuleList，并加载每个moduleId，根据moduleId，从ModuleFactory中取出moduleConstructBlock，从LayoutFactory中取出layoutBlock，从areaFactory中取出areaConstruct，由此构造出完整的组件并添加到直播间view中。
 
 
-### 层级关系 ###
+### 层级关系
 上图已有，拿出来再说一下
 ![图片2](/img/mobileYY-Channel-modularizationLoad_hierarchy.jpg)
 
