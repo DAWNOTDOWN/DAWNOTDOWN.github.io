@@ -247,7 +247,7 @@
 
 <h3 id="组件加载">组件加载</h3>
 <p>这里拿观众端娱乐模板+麦序模式举起一个栗子
-<img src="/img/mobileYY-Channel-modularization.png" alt="图片1" />
+<img src="/img/mobileYY-Channel-Modularization.png" alt="图片1" />
 也可点这里→<a href="https://www.processon.com/view/link/5aafe49be4b0e935339228b5">图</a></p>
 
 <p>大概流程如下：<br />
@@ -265,7 +265,7 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
 
 <h3 id="层级关系">层级关系</h3>
 <p>上图已有，拿出来再说一下
-<img src="/img/mobileYY-Channel-modularization_hierarchy.jpg" alt="图片2" /></p>
+<img src="/img/mobileYY-Channel-Modularization_hierarchy.jpg" alt="图片2" /></p>
 
 <p>ViewController的有三个view，分别是ChannelVC的self.view，self.contentView和self.modalView。默认情况下，组件是加载到contentView中，modalView一般用来显示直播间的弹框等模态的view，而且一些组件比如onlineListModuleView，因为他覆盖在整个直播间上，相当于push了一个新的vc，所以也加载了modalView中。</p>
 

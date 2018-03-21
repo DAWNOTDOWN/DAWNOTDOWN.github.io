@@ -5,8 +5,8 @@
     <description>做个有趣的人类。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 21 Mar 2018 22:24:44 +0800</pubDate>
-    <lastBuildDate>Wed, 21 Mar 2018 22:24:44 +0800</lastBuildDate>
+    <pubDate>Wed, 21 Mar 2018 23:14:27 +0800</pubDate>
+    <lastBuildDate>Wed, 21 Mar 2018 23:14:27 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -90,7 +90,7 @@
 
 &lt;h3 id=&quot;组件加载&quot;&gt;组件加载&lt;/h3&gt;
 &lt;p&gt;这里拿观众端娱乐模板+麦序模式举起一个栗子
-&lt;img src=&quot;/img/mobileYY-Channel-modularization.png&quot; alt=&quot;图片1&quot; /&gt;
+&lt;img src=&quot;/img/mobileYY-Channel-Modularization.png&quot; alt=&quot;图片1&quot; /&gt;
 也可点这里→&lt;a href=&quot;https://www.processon.com/view/link/5aafe49be4b0e935339228b5&quot;&gt;图&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;大概流程如下：&lt;br /&gt;
@@ -108,7 +108,7 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
 
 &lt;h3 id=&quot;层级关系&quot;&gt;层级关系&lt;/h3&gt;
 &lt;p&gt;上图已有，拿出来再说一下
-&lt;img src=&quot;/img/mobileYY-Channel-modularization_hierarchy.jpg&quot; alt=&quot;图片2&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/mobileYY-Channel-Modularization_hierarchy.jpg&quot; alt=&quot;图片2&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ViewController的有三个view，分别是ChannelVC的self.view，self.contentView和self.modalView。默认情况下，组件是加载到contentView中，modalView一般用来显示直播间的弹框等模态的view，而且一些组件比如onlineListModuleView，因为他覆盖在整个直播间上，相当于push了一个新的vc，所以也加载了modalView中。&lt;/p&gt;
 
