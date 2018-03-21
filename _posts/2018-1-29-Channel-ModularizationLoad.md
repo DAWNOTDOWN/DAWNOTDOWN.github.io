@@ -4,7 +4,7 @@ title:      "mobileYY_Channel-ModularizationLoad"
 subtitle:   "手Y直播间组件化"
 date:       2018-1-29 00:00:00
 author:     "DAWNOTDOWN"
-header-img: "img/post-bg-mobileYY-Channel-ModularizationLoad.png"
+header-img: "img/post-bg-mobileYY-Channel-ModularizationLoad.jpg"
 tags:
     - 原创
     - iOS开发
