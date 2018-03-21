@@ -10,9 +10,9 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/ren_favicon.ico">
 
-    <title>First blog contribute to LIFE - 朝晨博客 | Zhaochen Blog</title>
+    <title>mobileYY_Push - 朝晨博客 | Zhaochen Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/2016/11/29/first-blog/">
+    <link rel="canonical" href="http://localhost:4000/2017/12/18/Push/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -125,12 +125,12 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-2015.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-Push.png" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('/img/post-bg-2015.jpg')
+        background-image: url('/img/post-bg-Push.png')
     }
 </style>
 <header class="intro-header" >
@@ -140,15 +140,17 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                        <a class="tag" href="/tags/#原创" title="原创">原创</a>
+                        
+                        <a class="tag" href="/tags/#iOS开发" title="iOS开发">iOS开发</a>
                         
                     </div>
-                    <h1>First blog contribute to LIFE</h1>
+                    <h1>mobileYY_Push</h1>
                     
                     
-                    <h2 class="subheading">如果你现在过不好，以后怎么能过好</h2>
+                    <h2 class="subheading">手Y推送系统</h2>
                     
-                    <span class="meta">Posted by DAWNOTDOWN on November 29, 2016</span>
+                    <span class="meta">Posted by DAWNOTDOWN on December 18, 2017</span>
                 </div>
             </div>
         </div>
@@ -167,8 +169,106 @@
                 post-container">
 
 				<blockquote>
-  <p>“Yeah It’s a good start.”</p>
+  <p>“最近在交接Push业务，也举办了一次分享会介绍手Y的Push业务以及新增的notificationService Extension对同事们的影响”</p>
 </blockquote>
+
+<h1 id="apns">APNs</h1>
+<p>手Y iOS的推送用的是APNs，全称Apple Push Notification Service，iOS开发所用的推送服务一般都是苹果的这一套。</p>
+
+<p><img src="/img/Push-APNS.jpg" alt="图片1" /></p>
+
+<p><strong>机制概述</strong><br />
+Provider：可以理解为程序后台的推送服务器<br />
+第一阶段：Provider把打包的信息（按照开发文档约定的HTTP/2 接口请求，携带必要的信息）发给APNs。<br />
+第二阶段：APNs在自身的已注册推送服务的设备列表中，查找有相应标识的设备，并把消息发送到对应设备。<br />
+第三阶段：设备把发来的消息传递给相应的应用程序做展示和处理</p>
+
+<p><strong>部分特性</strong><br />
+面向一统苹果终端设备的推送服务（service for iOS (and, indirectly, watchOS), tvOS, and macOS devices）
+经过认证的、加密的、持久的系统级的IP连接<br />
+独立的系统级进程<br />
+可控的展示和处理</p>
+
+<p>相比较Android的各大厂商一套，优点很明显。<br />
+各自应用维护各自的长连接，到达率很低。产品经常吐槽这一点<br />
+多种协议,服务或轮询的方式，增加了兼容的成本。Android没有类似iOS的本地推送，所以之前有一个倒计时使用本地推送的业务，他们采用了后台跑一个程序，轮询的方案来实现，iOS就简单多了<br />
+不同厂商的服务不同，传输的供客户端识别的数据也可能不同，增加了前后台开发沟通的成本。比如有图样式这样一个业务<br />
+不同厂商或终端的推送层级不同，有的是应用在前台的时候，有的kill进程也可以出现<br />
+…<br />
+等等</p>
+
+<h1 id="推送流程">推送流程</h1>
+<p><strong>流程概述</strong><br />
+​<img src="/img/Push-flow.jpg" alt="图片2" />
+a.应用程序向 APNs 服务器注册<br />
+b.注册成功后会收到APNs服务器的回调，收到一个 devicetoken<br />
+c.将这个 devicetoken 发送给我们自己的应用推送服务器<br />
+d.应用推送服务器将打算要发送的消息按照指定的格式进行打包，然后结合 iOS 设备的 devicetoken一起发请求给 APNs 服务器<br />
+e.b注册成功后我们的应用会和 APNs 服务器维持一个基于 TCP 的长连接，APNs 服务器将新消息推送到iOS 设备上<br />
+f.设备上的推送子进程或App主进程根据App生存状态处理推送任务</p>
+
+<p>​  <br />
+​  <br />
+<strong>实现细节</strong><br />
+1.devicetoken的获取<br />
+  a.app开启推送功能，开发者中心网站配置推送证书+app内配置<br />
+  b.客户端去注册<br />
+  c.收到注册状态成功或失败的回调，成功回调里包括devicetoken值<br />
+2.把devicetoken发送给推送服务器存储<br />
+3.推送服务器发送推送请求给某一devicetoken<br />
+  a.与APNs服务器使用TLS协议请求连接<br />
+  b.基于JW Token的方式（header（alg+kid（开发者中心网站配置））+payload（teamID+时间戳）+signature（对header+payload使用私钥加密）） 或 基于证书方式（证书（开发者中心网站配置SSL证书并生成p12）+私钥）来保持<br />
+  c.发送基于HTTP/2的数据请求给APNs<br />
+    :method POST<br />
+    :host           dev: api.development.push.apple.com:443<br />
+            distribute: api.push.apple.com:443<br />
+    :path /3/device/devicetoken<br />
+<br />
+     header:<br />
+     authorization:JWT认证方式需要的JW Token<br />
+     apns-expiration:通知过期时间。<br />
+     apns-id:标识通知的UUID。如果发送通知时发生错误，APNs 使用此值来标识通知，通知服务器。<br />
+     apns-priority:通知优先级。<br />
+     apns-topic:标识bundleId。JWT认证方式必须要，证书方式可使用证书里自带的。<br />
+     apns-collapse-id:会覆盖客户端此值相同的消息。<br />
+​<img src="/img/Push-APayload.jpg" alt="图片3" />
+  d.收到response/成功：APNs做下一步发送给设备处理<br />
+4.客户端进行处理<br />
+​</p>
+<blockquote>
+  <p>本地推送：由客户端直接创建的推送消息，创建成功直接交付本机推送子进程或App主进程，可使用苹果推送框架间接对payload数据进行创建，并指定推送数据触发时机（时间,地点,重复机制）等</p>
+</blockquote>
+
+<h1 id="客户端的处理">客户端的处理</h1>
+<p>客户端的处理从APNs把消息信息交付推送子进程开始，在不同的框架+Extension下流程会不同。
+可见数据：一部分header和payload信息。</p>
+
+<p><img src="/img/Push-ClientHandle.jpg" alt="图片4" /></p>
+
+<h1 id="notificationservice-extension">notificationService Extension</h1>
+
+<p>手Y在7.1版实现了在App进程不运行的时候也要完成有图样式的推送展示，主要使用了NotificationService Extension<br />
+<img src="/img/Push-notificationServiceExtension.jpg" alt="图片5" />
+实现这个需求需要做以下事情<br />
+1.在客户端新增notificationServiceExtension，以及-didReceiveNotificationRequest:withContentHandler:并实现对原有UNMutableNotificationContent的修改以及增加图片attachment<br />
+2.业务后台或者分发Push侧增加aps的mutable-content = 1字段以及包含图片下载链接的字段等</p>
+<blockquote>
+  <p>通过这个需求也给了我一些启示。<br />
+Extension可以补充在App主进程上做不到的一些需求，比如推送带附件。（推送数据包只有4k，但可以在Extension里有30s下载时间），甚至iOS推送送达率统计<br />
+实现App主进程不启动的情况下的一些需求。如下载图片,视频等；在展示前改变原有推送payload等</p>
+</blockquote>
+
+<h3 id="意想不到的问题">意想不到的问题</h3>
+<p>1.在开发notificationServiceExtension的时候，除了一般的开发工作，还需要像主工程那样的为这个Extension注册（Wildcard App ID：com.yy.yymobile.xxxxxx.*,是的没错，带个星号），生成Provisioning Profiles文件。于是这个证书就成为了每位手Y iOS开发同事所必备的了，邮件群发了好多人，好多组。 <br />
+2.ci构建系统恰逢升级Xcode9。正常在Xcode8下，会生成YYMobile.app/embedded.mobileprovision和/PlugIns/notificationService.appex/embedded.mobileprovision
+但是Xcode9，只生成了YYMobile.app/embedded.mobileprovision，没有extension的，embedded.mobileprovision。这就造成了潜在的App下载成功但是安装不了的问题。原因是Xcode9要在编译时带上签名，这就需要事先知道要编译Extension且还要拿到extension的{PRODUCT_NAME}，所以我们在原先的编译配置文件里增加了一个extension=true的字段并且与ci约定了一种新的配置文件，一种Extension写一个，针对不同生产和发布环境各在Configuration里放一个绑定，并使用<br />
+APP_BUNDLE_IDENTIFIER: 主app的bundle identifier（用于作为Extension的bundle identifier的前缀），构建时会自动更新<br />
+PRODUCT_NAME : Extension工程名称也是Extension的目录名称，可用于获取Info.plist文件并修改版本号<br />
+BUNDLE_ID_SUFFIX: Extension的bundle identifier的后缀名称，一般与Extension的PRODUCT_NAME一致<br />
+PRODUCT_BUNDLE_IDENTIFIER: Extension target对应的bundle identifier。由主app的bundle id和extension的后缀名称组成<br />
+PROVISIONING_PROFILE_SPECIFIER：Extension target构建时所需要使用的profile，构建时会自动更新<br />
+这样放在工程的根目录下的一个约定好的目录里，供ci的脚本识别</p>
+
 
 
                 <hr>
@@ -178,9 +278,13 @@
 
                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2016/11/29/first-blog/" data-toggle="tooltip" data-placement="top" title="First blog contribute to LIFE">&larr; Previous Post</a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/2017/12/18/Push/" data-toggle="tooltip" data-placement="top" title="mobileYY_Push">Next Post &rarr;</a>
+                        <a href="/2018/01/29/Channel-ModularizationLoad/" data-toggle="tooltip" data-placement="top" title="mobileYY_Channel-ModularizationLoad">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
