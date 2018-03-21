@@ -59,7 +59,13 @@ tags:
 9.添加预览界面  
 10.点击开播按钮，开始3s倒计时动画界面  
 11.移除预览界面  
-12.创建当前的模板类LiveChannelViewController，alpha=0，添加在LiveParentViewController上  
+12.创建当前的模板类LiveParentNormalTemplate,模板类再创建LiveChannelViewController，alpha=0，添加在LiveParentViewController上  
 13.同步加载所需的所有组件  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在3s结束后，LiveChannelViewController，alpha=1
+
+### 开播模板UML
+![图片3](/img/mobileYY-Channel-Templatization_liveUML.jpg)
+开播的核心类是LiveParentViewController。控制着音视频逻辑、业务逻辑（LiveParentTemplate实例）等。
+LiveParentViewController用模板ID（TemplateID）通过LiveParentTemplateFactory实例化指定模板，调用接口化（ILiveParentTemplate）后的模板实例来处理模板逻辑。
+开播业务模板首先需继承LiveParentBaseTemplate基类。然后实现ILiveParentTemplate，协议内各函数在协议类有具体说明。initTemplate、destoryTemplate、excuteTemplateAuth是必须实现的，分别代表初始化、销毁、开播鉴权。业务UIViewController在模板内创建并由模板控制。如LiveParentNormalTemplate模板类创建了LiveChannelViewController。
 
