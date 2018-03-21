@@ -5,8 +5,8 @@
     <description>做个有趣的人类。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 21 Mar 2018 10:30:34 +0800</pubDate>
-    <lastBuildDate>Wed, 21 Mar 2018 10:30:34 +0800</lastBuildDate>
+    <pubDate>Wed, 21 Mar 2018 10:40:21 +0800</pubDate>
+    <lastBuildDate>Wed, 21 Mar 2018 10:40:21 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -128,8 +128,8 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
   &lt;p&gt;“来YY快1年了,也做了很多直播间内的业务，今天介绍一下我们正在优化的手Y直播间的组件化加载”&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h1 id=&quot;手y的直播间&quot;&gt;手Y的直播间&lt;/h1&gt;
-&lt;p&gt;手Y的直播间本质上就是YY的频道，进直播间等同于先进了某个频道，对开播侧的主播来说也是如此，然后再实现频道内的几乎所有功能，频道是直播间的一个剥离具体业务的抽象。&lt;/p&gt;
+&lt;p&gt;##手Y的直播间111##
+手Y的直播间本质上就是YY的频道，进直播间等同于先进了某个频道，对开播侧的主播来说也是如此，然后再实现频道内的几乎所有功能，频道是直播间的一个剥离具体业务的抽象。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;手Y直播间需要有PC频道物理相关的所有功能:&lt;/strong&gt;&lt;br /&gt;
 1.频道管理功能&lt;br /&gt;
@@ -174,9 +174,9 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
 …&lt;br /&gt;
 ​等等，大概有5 60种…
 ​
-​&lt;/p&gt;
-&lt;h1 id=&quot;直播间的组件化加载&quot;&gt;直播间的组件化加载&lt;/h1&gt;
-&lt;p&gt;手Y的直播间按使用人群分可分为两类，观看端和开播端；按模式分可分为至少三类，麦序模式，主席模式，自由模式；按模板分可分为开播端模板，娱乐模板，游戏模板，抓娃娃模板等等。不同的端，不同的模式，不同的模板，会加载不同的业务；不同的业务，拥有不同的view，各个view之间有业务上的交互，还有view之间的约束依赖。&lt;br /&gt;
+​&lt;br /&gt;
+##直播间的组件化加载##
+手Y的直播间按使用人群分可分为两类，观看端和开播端；按模式分可分为至少三类，麦序模式，主席模式，自由模式；按模板分可分为开播端模板，娱乐模板，游戏模板，抓娃娃模板等等。不同的端，不同的模式，不同的模板，会加载不同的业务；不同的业务，拥有不同的view，各个view之间有业务上的交互，还有view之间的约束依赖。&lt;br /&gt;
 现有业务在小小的屏幕上占一个坑，以后的业务又还想再进来。旧的模板满足不了日益增多的功能，新的模板又需要兼容一部分旧的模板。&lt;br /&gt;
 基于模板和模式的手Y直播间加载各个业务view，采用了组件化的方式，重点考虑了以下几个要素：    &lt;br /&gt;
 组件独立处理业务，不耦合太严重。&lt;br /&gt;
