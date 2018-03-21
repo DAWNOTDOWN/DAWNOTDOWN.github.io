@@ -1,3 +1,10 @@
 # Zhaochen Blog
 
-##### This is the Blog of Zhaochen(weibo@朝晨尚未央:http://weibo.com/ha100022628)
+>This is the [Blog](https://dawnotdown.github.io/2018/01/29/Channel-ModularizationLoad/) of Zhaochen,something about life or iOS-dev.
+
+##### The following had posted:  
+
+date | title | content
+---- | --- | --- 
+2018-1-29 | [Channel-ModularizationLoad](https://dawnotdown.github.io/2018/01/29/Channel-ModularizationLoad/)  | 手Y直播间组件化加载
+2016-11-29 |  [first-blog](https://dawnotdown.github.io/2016/11/29/first-blog/) | 第一篇
