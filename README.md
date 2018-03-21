@@ -1,6 +1,6 @@
 # Zhaochen Blog
 
->This is the [Blog](https://dawnotdown.github.io/2018/01/29/Channel-ModularizationLoad/) of Zhaochen,something about life or iOS-dev.
+>This is the [Blog](https://dawnotdown.github.io/) of Zhaochen,something about life or iOS-dev.
 
 ##### The following had posted:  
 
