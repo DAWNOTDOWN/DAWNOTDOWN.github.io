@@ -6,9 +6,9 @@ date:       2018-1-29 00:00:00
 author:     "DAWNOTDOWN"
 header-img: "img/post-bg-mobileYY-Channel-ModularizationLoad.jpg"
 tags:
-    - 开发
+    - 原创
+    - iOS开发
 ---
-
 >"来YY快1年了,也做了很多直播间内的业务，今天介绍一下我们正在优化的手Y直播间的组件化加载"  
 
 # 手Y的直播间  
@@ -108,4 +108,3 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
 ![图片2](/img/mobileYY-Channel-modularizationLoad_hierarchy.jpg)
 
 ViewController的有三个view，分别是ChannelVC的self.view，self.contentView和self.modalView。默认情况下，组件是加载到contentView中，modalView一般用来显示直播间的弹框等模态的view，而且一些组件比如onlineListModuleView，因为他覆盖在整个直播间上，相当于push了一个新的vc，所以也加载了modalView中。 
- 

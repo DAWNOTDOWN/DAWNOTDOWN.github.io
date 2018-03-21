@@ -5,8 +5,8 @@
     <description>做个有趣的人类。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 21 Mar 2018 10:52:42 +0800</pubDate>
-    <lastBuildDate>Wed, 21 Mar 2018 10:52:42 +0800</lastBuildDate>
+    <pubDate>Wed, 21 Mar 2018 11:24:28 +0800</pubDate>
+    <lastBuildDate>Wed, 21 Mar 2018 11:24:28 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -111,13 +111,14 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
 &lt;img src=&quot;/img/mobileYY-Channel-modularizationLoad_hierarchy.jpg&quot; alt=&quot;图片2&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ViewController的有三个view，分别是ChannelVC的self.view，self.contentView和self.modalView。默认情况下，组件是加载到contentView中，modalView一般用来显示直播间的弹框等模态的view，而且一些组件比如onlineListModuleView，因为他覆盖在整个直播间上，相当于push了一个新的vc，所以也加载了modalView中。&lt;/p&gt;
-
 </description>
         <pubDate>Mon, 29 Jan 2018 08:00:00 +0800</pubDate>
         <link>http://localhost:4000/2018/01/29/Channel-ModularizationLoad/</link>
         <guid isPermaLink="true">http://localhost:4000/2018/01/29/Channel-ModularizationLoad/</guid>
         
-        <category>开发</category>
+        <category>原创</category>
+        
+        <category>iOS开发</category>
         
         
       </item>
