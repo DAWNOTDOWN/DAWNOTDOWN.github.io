@@ -32,9 +32,9 @@ tags:
 **手Y直播间也需要有频道里业务相关的所有功能：**  
 1.公屏  
 2.弹幕  
-3.麦序  
+3.麦序列表   
 4.送礼  
-5.礼物流水  
+5.礼物流水动画  
 6.各种h5玩法（周星周卡,幸运转盘...）  
 7.私聊  
 8.清晰度切换    
@@ -53,10 +53,11 @@ tags:
 9.贴纸（主要在主播端）     
 10.音乐（主要在主播端）     
 11.贡献榜  
-12.h5活动条    
-...  
-​等等，大概有5 60种...
-​
+12.h5活动条  
+...   
+hnmmm...有这么多:
+![图片1](/img/mobileYY-Channel-Modularization_moduleNums.jpg)  
+组件化主要组件的是频道里的业务相关功能，上图里的每一个ModuleId都对应一个组件。  
 ​  
 # 直播间的组件化
 手Y的直播间按使用人群分可分为两类，观看端和开播端；按模式分可分为至少三类，麦序模式，主席模式，自由模式；按模板分可分为开播端模板，娱乐模板，游戏模板，抓娃娃模板等等。不同的端，不同的模式，不同的模板，会加载不同的业务；不同的业务，拥有不同的view，各个view之间有业务上的交互，还有view之间的约束依赖。  
@@ -86,7 +87,7 @@ tags:
 
 ### 组件加载
 这里拿观众端娱乐模板+麦序模式举起一个栗子
-![图片1](/img/mobileYY-Channel-Modularization.png)
+![图片2](/img/mobileYY-Channel-Modularization.png)
 也可点这里→[图](https://www.processon.com/view/link/5aafe49be4b0e935339228b5) 
  
 大概流程如下：  
@@ -102,10 +103,14 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
 8.调用p_moduleDidLoad方法，使用module.moduleView设置业务逻辑  
 9.YYChannelModeLoader继续加载，遍历剩下的defaultModuleList，并加载每个moduleId，根据moduleId，从ModuleFactory中取出moduleConstructBlock，从LayoutFactory中取出layoutBlock，从areaFactory中取出areaConstruct，由此构造出完整的组件并添加到直播间view中。
 
+### 一群组件
+![图片3](/img/mobileYY-Channel-Modularization_modules.jpg)
+完成了以上的加载，看下直播间的的hierarchy
+可以看到YYParentChannelViewController下层是YYEChannelTemplateViewController（娱乐模板），YYBaseTemplateView是模板上的View，组件被添加在了三种ContainerView（图没有截全），分别是contentView,ModalView和自身的view。
+
 
 ### 层级关系
-上图已有，拿出来再说一下
-![图片2](/img/mobileYY-Channel-Modularization_hierarchy.jpg)
+![图片5](/img/mobileYY-Channel-Modularization_hierarchy.jpg)
 
 ViewController的有三个view，分别是ChannelVC的self.view，self.contentView和self.modalView。默认情况下，组件是加载到contentView中，modalView一般用来显示直播间的弹框等模态的view，而且一些组件比如onlineListModuleView，因为他覆盖在整个直播间上，相当于push了一个新的vc，所以也加载了modalView中。 
 
