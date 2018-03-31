@@ -10,9 +10,9 @@
     <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/ren_favicon.ico">
 
-    <title>mobileYY_Channel-Modularization - 朝晨博客 | Zhaochen Blog</title>
+    <title>mobileYY_CommandRoute - 朝晨博客 | Zhaochen Blog</title>
 
-    <link rel="canonical" href="http://localhost:4000/2018/01/29/Channel-Modularization/">
+    <link rel="canonical" href="http://localhost:4000/2018/03/01/CommandRoute/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -125,12 +125,12 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-mobileYY-Channel-Modularization.jpg" width="0" height="0"> -->
+<!-- <img src="/img/post-bg-CommandRoute.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('/img/post-bg-mobileYY-Channel-Modularization.jpg')
+        background-image: url('/img/post-bg-CommandRoute.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -145,12 +145,12 @@
                         <a class="tag" href="/tags/#iOS开发" title="iOS开发">iOS开发</a>
                         
                     </div>
-                    <h1>mobileYY_Channel-Modularization</h1>
+                    <h1>mobileYY_CommandRoute</h1>
                     
                     
-                    <h2 class="subheading">手Y直播间组件化</h2>
+                    <h2 class="subheading">手Y命令号路由系统</h2>
                     
-                    <span class="meta">Posted by DAWNOTDOWN on January 29, 2018</span>
+                    <span class="meta">Posted by DAWNOTDOWN on March 1, 2018</span>
                 </div>
             </div>
         </div>
@@ -169,114 +169,75 @@
                 post-container">
 
 				<blockquote>
-  <p>“来YY快1年了,也做了很多直播间内的业务，今天介绍一下我们正在优化的手Y直播间的组件化加载”</p>
+  <p>“整理了一下以前参与的命令号路由这一块儿，这一块儿基本是推送落地的一个基石，现在越来越多的业务需要命令号路由系统，基本上每有一个业务都需要新加一个命令了~”</p>
 </blockquote>
 
-<h1 id="手y的直播间">手Y的直播间</h1>
-<p>手Y的直播间本质上就是YY的频道，进直播间等同于先进了某个频道，对开播侧的主播来说也是如此，然后再实现频道内的几乎所有功能，频道是直播间的一个剥离具体业务的抽象。</p>
+<h1 id="url">URL</h1>
+<p>URL，Uniform Resource Locator，统一资源定位符，是一种 URI，用定位的方式来精确描述。<br />
+URN，Uniform Resource Name，统一资源名称，也是一种 URI，用名字来命名但不指定如何定位某个Resource。<br />
+URI，Uniform Resource Identifier，统一资源标识符。
+URN如同一个人的名称，而 URL代表一个人的住址。换言之，URN 定义某事物的身份，而 URL 提供查找该事物的方法。</p>
 
-<p><strong>手Y直播间需要有PC频道物理相关的所有功能:</strong><br />
-1.频道管理功能<br />
-管理员有把用户拖进或踢出频道的功能，也有把用户拖上麦序或拖离麦序的功能<br />
-2.频道号<br />
-常见的频道号有显式的官频号,短位和长位号以及子频道号<br />
-开发层面的频道号只识别顶级频道号TopSid和子频道号SubSid的对应关系<br />
-3.视频流与直播间<br />
-视频流不依赖于直播间，可能正在进频道的过程时就已经开始走视频流拉取流程。比如开播端<br />
-4.直播间主播和首麦<br />
-直播间的主播指的就是当前在首麦的用户，它不一定是该直播间的拥有者，也不一定是当前直播间的视频流上传者，麦序是麦序，视频流是视频流。比如YY交友业务里的乱斗玩法，首麦和次麦两路流都上传，观众侧看到的可能是次麦<br />
-5.进频道与频道切换<br />
-​进频道是需要登录的，没登录账号就能进直播间是因为使用了匿名账号登录，当登录账号或者切换账号时，需要退出直播间然后重新进一次直播间。当然，在一个频道里切换子频道也是需要这样操作<br />
-…<br />
-​等等<br />
-​  <br />
-<strong>手Y直播间也需要有频道里业务相关的所有功能：</strong><br />
-1.公屏<br />
-2.弹幕<br />
-3.麦序列表 <br />
-4.送礼<br />
-5.礼物流水动画<br />
-6.各种h5玩法（周星周卡,幸运转盘…）<br />
-7.私聊<br />
-8.清晰度切换  <br />
-9.连麦<br />
-10.关注<br />
-…<br />
-<strong>还有结合手机业务相关的所有功能：</strong><br />
-1.转屏<br />
-2.音频模式<br />
-3.清屏<br />
-4.分享<br />
-5.大礼物<br />
-6.贵族<br />
-7.玩法（主要在主播端，欢乐篮球,欢乐斗,还有最近做的吃货脸萌,魔法手势,变声…） <br />
-8.美颜（主要在主播端）  <br />
-9.贴纸（主要在主播端）   <br />
-10.音乐（主要在主播端）   <br />
-11.贡献榜<br />
-12.h5活动条<br />
-… <br />
-hnmmm…有这么多:
-<img src="/img/mobileYY-Channel-Modularization_moduleNums.jpg" alt="图片1" /><br />
-组件化主要组件的是频道里的业务相关功能，上图里的每一个ModuleId都对应一个组件。<br />
-​</p>
-<h1 id="直播间的组件化">直播间的组件化</h1>
-<p>手Y的直播间按使用人群分可分为两类，观看端和开播端；按模式分可分为至少三类，麦序模式，主席模式，自由模式；按模板分可分为开播端模板，娱乐模板，游戏模板，抓娃娃模板等等。不同的端，不同的模式，不同的模板，会加载不同的业务；不同的业务，拥有不同的view，各个view之间有业务上的交互，还有view之间的约束依赖。<br />
-现有业务在小小的屏幕上占一个坑，以后的业务又还想再进来。旧的模板满足不了日益增多的功能，新的模板又需要兼容一部分旧的模板。<br />
-基于模板和模式的手Y直播间加载各个业务view，采用了组件化的方式，重点考虑了以下几个要素：    <br />
-组件独立处理业务，不耦合太严重。<br />
-组件之间需要交互，但要低耦合。<br />
-组件应该在模板下有某种方式自动加载。  <br />
-组件的约束应该可以方便的设置和修改。<br />
-不同的模板要允许自定义加载不同的组件。</p>
+<h1 id="url-scheme">URL Scheme</h1>
+<p>在https://dawnotdown.github.io这串网址里，scheme就是https，标识这个URL最初始的位置。<br />
+在iOS里URL Scheme一般用于苹果应用间的跳转。我们在一个应用的plist配置里定义这样一个scheme来告诉苹果系统这个应用的标识，通过[UIApplication sharedApplication] openURL或者Safari等方式来实现跳转的过程，对应的App通过application:openURL:…等方法来响应这一过程，进而可以实现某些App间的需求。</p>
 
-<p>所以，我们重新设计了直播间的组件化加载方式。</p>
+<h1 id="app-inside-command">App-Inside Command</h1>
+<p>对一个用户来说，每天完成App间的相互跳转的频率可能比在一个App内的跳转的频率还要低。对于开发来说更是，业务或者模块间相互的跳转只会越来越多，伴随着可能就是越来越大的耦合。<br />
+App-Inside Command，App内的命令号希望可以通过一串像命令一样的东西，来完成App内的各种跳转过程。<br />
+<strong>如何跳转</strong> <br />
+从Window层开始找到当前的VC或Nav的某一根视图或TabBarC下的某一根视图<br />
+在当前VC进行present或dismiss掉Nav的视图然后再push <br />
+<strong>什么是命令号</strong><br />
+以前手Y的命令号是不规范的URL格式，<br />
+比如：<br />
+yymobile://Channel/Live/83191303/83191303，同一业务的path会变  <br />
+yymobile://Channel/Live/45294452/452294452?tpl=16777217，同一业务的path和query都会变  <br />
+我们希望把它统一改进为URL的样子并且支持路由功能。
+比如：
+yymobile://Channel/Live?sid=45294452&amp;ssid=452294452&amp;tpl=16777217，同一业务只有query会变</p>
 
-<h3 id="一个组件">一个组件</h3>
-<p>一个组件至少需要以下部分：<br />
-1.组件的View及其业务逻辑<br />
-2.组件的布局<br />
-3.组件的加载<br />
-代码上由以下构成：<br />
-1.ModuleView:YYChannelModuleView，是被添加到直播间的一个组件的view的入口，这个view就是这个组件在直播间的containerView<br />
-2.AreaView：ModuleView的parentView，建立与直播间superView的约束，ModuleView平铺在这个View上<br />
-3.ViewModel:YYChannelModuleUIManager，每个YYChannelModuleView都关联一个UIManager的ViewModel，是组件的业务逻辑所在，相当于moduleView的ViewController<br />
-4.DataProvider:YYChannelModuleDataProvider，为moduleView提供网络请求和数据<br />
-5.IXXXModuleBridge,ModuleBridge:YYBridge <IXXXModuleBridge>与ModuleImplementation:YYImplementation <IXXXModuleBridge>，为其他组件暴露接口，方便其他组件调用本组件的逻辑。  
-7.ModuleStatistic:NSObject <IModuleStatistic>，数据上报使用  
-8.Views，是组件所用到的自定义SubViews</IModuleStatistic></IXXXModuleBridge></IXXXModuleBridge></p>
+<h1 id="app-inside-url">App-Inside URL</h1>
+<p>对于上面的命令号我们改进为了下面的标准URL格式
+<img src="/img/mobileYY-CommandRoute_yymobile.jpg" alt="图片1" />
+并且对原来旧的提供了支持，重新设计了路由，自此命令号升级为了路由系统。</p>
+<h3 id="路由的作用">路由的作用</h3>
+<p>1.解决了模块间页面切换和跳转的难题，解除了这种场景下的耦合性<br />
+2.便于服务器下发动态配置文件来配置某些场景和活动的跳转逻辑<br />
+3.统一了iOSAndroid两端的页面跳转逻辑，甚至能统一三端的请求资源的方式<br />
+4.解决了外部跳转到App内部一个界面的问题，比如推送,3D Touch等外部请求<br />
+5.改变既定跳转线路，达到热修复的目的</p>
+<h3 id="路由的实现">路由的实现</h3>
+<p><strong>我们的考虑</strong><br />
+我们在实现路由和沿用原命令号的方式主要希望达到以下几点：<br />
+1.各业务方可以自己维护跳转代码<br />
+2.路由过程对业务方透明<br />
+3.兼容原命令号</p>
 
-<h3 id="组件加载">组件加载</h3>
-<p>这里拿观众端娱乐模板+麦序模式举起一个栗子
-<img src="/img/mobileYY-Channel-Modularization.png" alt="图片2" />
-也可点这里→<a href="https://www.processon.com/view/link/5aafe49be4b0e935339228b5">图</a></p>
+<p><strong>设计流程</strong>
+<img src="/img/mobileYY-CommandRoute.png" alt="图片2" />
+也可点这里→<a href="https://www.processon.com/view/link/5ab1380be4b007d2510ceec9">图</a></p>
 
-<p>大概流程如下：<br />
-1.娱乐模板YYEChannelTemplateController的super YYBaseChannelViewController  <br />
-2.基础模板YYBaseChannelViewController刚加载的时候创建ModeController  <br />
-3.ModeController创建ModeLoader<br />
-4.modeLoader根据麦序模式创建ModeModuleFactory和ModeLayoutFactory
-ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用moduleId注册到一个map中，在后续YYChannelModeLoader加载某个组件时，通过moduleId取出moduleConstructBlock并执行，从而初始化并添加moduleView。
-布局的管理由LayoutFactory管理，对每个组件创建YYLayoutLoader，包含p_layoutBlock(竖屏约束)，l_layoutBlock（横屏约束）和fixed_layoutBlock（固定约束），并同样的以moduleId作为key注册到一个map中，方便后续YYChannelModeLoader加载时使用<br />
-5.执行loadModuleWithModuleId开始加载组件<br />
-6.首先加载完AreaLayout（拿moduleLoader.areaConstruct()用layoutLoader根据moduleId选择加约束在YYBaseChannelViewController的view还是modalView或是contentView）<br />
-7.然后加载Module（ModuleLoader调createModule通过moduleViewConstruct()生成一个YYmodule，然后area.areaView addSubView:module.moduleView并平铺）
-8.调用p_moduleDidLoad方法，使用module.moduleView设置业务逻辑<br />
-9.YYChannelModeLoader继续加载，遍历剩下的defaultModuleList，并加载每个moduleId，根据moduleId，从ModuleFactory中取出moduleConstructBlock，从LayoutFactory中取出layoutBlock，从areaFactory中取出areaConstruct，由此构造出完整的组件并添加到直播间view中。</p>
+<p>大概流程如下： <br />
+1.命令号格式由各业务维护，包括命令号的执行逻辑，比如跳转。<br />
+我们通过YYURINavigationCenter+XXXXClass的分类方式的设计由各业务方自己添加跳转逻辑。<br />
+每个分类下可注册多个命令号格式，每个命令号格式需实现两个方法:注册命令号到路由里
+和定义自己的跳转逻辑<br />
+并且我们通过带名传参的宏简化了业务注册的代码，如下图<br />
+<img src="/img/mobileYY-CommandRoute_code2.jpg" alt="图片3" />
+各业务方只需要实现如下图的简单代码就可以完成一个命令号格式
+<img src="/img/mobileYY-CommandRoute_code1.jpg" alt="图片4" /><br />
+2.App启动去注册路由动作<br />
+App启动的时候去调用所有YYURINavigationCenter类的以_UriNavigationCenterResign开头的方法（通过宏定义创建），以完成在YYRouteManager里YYRouteHandlerBlock与命令号的对应关系注册  <br />
+3.业务方调用YYRouteManager的单例来传入一个命令号<br />
+传入命令号以及VC和动画参数等，打包这些参数给YYRouteManager，YYRouteManager内部根据此命令号创建路由对象YYRoute，遍历已注册的所有路由关系，创建或使用已创建的命令号格式匹配对象YYRouteMatcher，每一种命令号格式对应一个YYRouteMatcher  <br />
+4.YYRouteMatcher的匹配操作<br />
+遍历所有YYRouteMatcher，会先判断传入的命令号是否是标准URL<br />
+如果不是标准URL，通过YYRouteMatcher对应的命令号格式生成的匹配正则表达式匹配此命令号。
+如果是标准URL，则通过URL规则去匹配命令号，为了兼容旧命令号，如果这里匹配不通过，会当做不标准URL继续尝试匹配。
+直到有YYRouteMatcher可以匹配当前的命令号<br />
+5.执行该命令号格式对应的block方法</p>
 
-<h3 id="一群组件">一群组件</h3>
-<p><img src="/img/mobileYY-Channel-Modularization_modules.jpg" alt="图片3" />
-完成了以上的加载，看下直播间的的hierarchy
-可以看到YYParentChannelViewController下层是YYEChannelTemplateViewController（娱乐模板），YYBaseTemplateView是模板上的View，组件被添加在了三种ContainerView（图没有截全），分别是contentView,ModalView和自身的view。</p>
-
-<h3 id="层级关系">层级关系</h3>
-<p><img src="/img/mobileYY-Channel-Modularization_hierarchy.jpg" alt="图片5" /></p>
-
-<p>ViewController的有三个view，分别是ChannelVC的self.view，self.contentView和self.modalView。默认情况下，组件是加载到contentView中，modalView一般用来显示直播间的弹框等模态的view，而且一些组件比如onlineListModuleView，因为他覆盖在整个直播间上，相当于push了一个新的vc，所以也加载了modalView中。</p>
-
-<blockquote>
-  <p>组件化使得各业务可以独立处理，相互之间耦合程度大大降低。各业务View在moduleLoader和layoutLoader的配合下加载，可以方便的设置,修改和新增。各业务逻辑集中在ModuleView和ViewModel内部，如果业务组件间需要交互，通过抛通知的方式或者GetCore注册调用或单例的方式拿</p>
-</blockquote>
 
 
                 <hr>
@@ -287,13 +248,9 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2017/12/18/Push/" data-toggle="tooltip" data-placement="top" title="mobileYY_Push">&larr; Previous Post</a>
+                        <a href="/2018/02/01/Channel-Templatization/" data-toggle="tooltip" data-placement="top" title="mobileYY_Channel-Templatization">&larr; Previous Post</a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2018/02/01/Channel-Templatization/" data-toggle="tooltip" data-placement="top" title="mobileYY_Channel-Templatization">Next Post &rarr;</a>
-                    </li>
                     
                 </ul>
 

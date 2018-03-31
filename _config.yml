@@ -14,7 +14,7 @@ baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog' pr
 RSS: false
 weibo_username:     ha100022628
 #zhihu_username:     huxpro
-github_username:    dawnotdown
+#github_username:    dawnotdown
 #twitter_username:  huxpro
 #facebook_username:  huxpro
 
@@ -82,8 +82,8 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     {
-        title: "Zhaochen Blog",
-        href: "https://dawnotdown.github.io"
+        title: "Zhaochen Github",
+        href: "https://github.com/dawnotdown"
     },{
         title: "Zhaochen Apple Personal Developer WebSite",
         href: "http://dwz.cn/rzcapp"

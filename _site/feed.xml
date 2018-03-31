@@ -5,9 +5,175 @@
     <description>做个有趣的人类。</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 21 Mar 2018 23:14:27 +0800</pubDate>
-    <lastBuildDate>Wed, 21 Mar 2018 23:14:27 +0800</lastBuildDate>
+    <pubDate>Sun, 01 Apr 2018 00:17:06 +0800</pubDate>
+    <lastBuildDate>Sun, 01 Apr 2018 00:17:06 +0800</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>mobileYY_CommandRoute</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“整理了一下以前参与的命令号路由这一块儿，这一块儿基本是推送落地的一个基石，现在越来越多的业务需要命令号路由系统，基本上每有一个业务都需要新加一个命令了~”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;url&quot;&gt;URL&lt;/h1&gt;
+&lt;p&gt;URL，Uniform Resource Locator，统一资源定位符，是一种 URI，用定位的方式来精确描述。&lt;br /&gt;
+URN，Uniform Resource Name，统一资源名称，也是一种 URI，用名字来命名但不指定如何定位某个Resource。&lt;br /&gt;
+URI，Uniform Resource Identifier，统一资源标识符。
+URN如同一个人的名称，而 URL代表一个人的住址。换言之，URN 定义某事物的身份，而 URL 提供查找该事物的方法。&lt;/p&gt;
+
+&lt;h1 id=&quot;url-scheme&quot;&gt;URL Scheme&lt;/h1&gt;
+&lt;p&gt;在https://dawnotdown.github.io这串网址里，scheme就是https，标识这个URL最初始的位置。&lt;br /&gt;
+在iOS里URL Scheme一般用于苹果应用间的跳转。我们在一个应用的plist配置里定义这样一个scheme来告诉苹果系统这个应用的标识，通过[UIApplication sharedApplication] openURL或者Safari等方式来实现跳转的过程，对应的App通过application:openURL:…等方法来响应这一过程，进而可以实现某些App间的需求。&lt;/p&gt;
+
+&lt;h1 id=&quot;app-inside-command&quot;&gt;App-Inside Command&lt;/h1&gt;
+&lt;p&gt;对一个用户来说，每天完成App间的相互跳转的频率可能比在一个App内的跳转的频率还要低。对于开发来说更是，业务或者模块间相互的跳转只会越来越多，伴随着可能就是越来越大的耦合。&lt;br /&gt;
+App-Inside Command，App内的命令号希望可以通过一串像命令一样的东西，来完成App内的各种跳转过程。&lt;br /&gt;
+&lt;strong&gt;如何跳转&lt;/strong&gt; &lt;br /&gt;
+从Window层开始找到当前的VC或Nav的某一根视图或TabBarC下的某一根视图&lt;br /&gt;
+在当前VC进行present或dismiss掉Nav的视图然后再push &lt;br /&gt;
+&lt;strong&gt;什么是命令号&lt;/strong&gt;&lt;br /&gt;
+以前手Y的命令号是不规范的URL格式，&lt;br /&gt;
+比如：&lt;br /&gt;
+yymobile://Channel/Live/83191303/83191303，同一业务的path会变  &lt;br /&gt;
+yymobile://Channel/Live/45294452/452294452?tpl=16777217，同一业务的path和query都会变  &lt;br /&gt;
+我们希望把它统一改进为URL的样子并且支持路由功能。
+比如：
+yymobile://Channel/Live?sid=45294452&amp;amp;ssid=452294452&amp;amp;tpl=16777217，同一业务只有query会变&lt;/p&gt;
+
+&lt;h1 id=&quot;app-inside-url&quot;&gt;App-Inside URL&lt;/h1&gt;
+&lt;p&gt;对于上面的命令号我们改进为了下面的标准URL格式
+&lt;img src=&quot;/img/mobileYY-CommandRoute_yymobile.jpg&quot; alt=&quot;图片1&quot; /&gt;
+并且对原来旧的提供了支持，重新设计了路由，自此命令号升级为了路由系统。&lt;/p&gt;
+&lt;h3 id=&quot;路由的作用&quot;&gt;路由的作用&lt;/h3&gt;
+&lt;p&gt;1.解决了模块间页面切换和跳转的难题，解除了这种场景下的耦合性&lt;br /&gt;
+2.便于服务器下发动态配置文件来配置某些场景和活动的跳转逻辑&lt;br /&gt;
+3.统一了iOSAndroid两端的页面跳转逻辑，甚至能统一三端的请求资源的方式&lt;br /&gt;
+4.解决了外部跳转到App内部一个界面的问题，比如推送,3D Touch等外部请求&lt;br /&gt;
+5.改变既定跳转线路，达到热修复的目的&lt;/p&gt;
+&lt;h3 id=&quot;路由的实现&quot;&gt;路由的实现&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;我们的考虑&lt;/strong&gt;&lt;br /&gt;
+我们在实现路由和沿用原命令号的方式主要希望达到以下几点：&lt;br /&gt;
+1.各业务方可以自己维护跳转代码&lt;br /&gt;
+2.路由过程对业务方透明&lt;br /&gt;
+3.兼容原命令号&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;设计流程&lt;/strong&gt;
+&lt;img src=&quot;/img/mobileYY-CommandRoute.png&quot; alt=&quot;图片2&quot; /&gt;
+也可点这里→&lt;a href=&quot;https://www.processon.com/view/link/5ab1380be4b007d2510ceec9&quot;&gt;图&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;大概流程如下： &lt;br /&gt;
+1.命令号格式由各业务维护，包括命令号的执行逻辑，比如跳转。&lt;br /&gt;
+我们通过YYURINavigationCenter+XXXXClass的分类方式的设计由各业务方自己添加跳转逻辑。&lt;br /&gt;
+每个分类下可注册多个命令号格式，每个命令号格式需实现两个方法:注册命令号到路由里
+和定义自己的跳转逻辑&lt;br /&gt;
+并且我们通过带名传参的宏简化了业务注册的代码，如下图&lt;br /&gt;
+&lt;img src=&quot;/img/mobileYY-CommandRoute_code2.jpg&quot; alt=&quot;图片3&quot; /&gt;
+各业务方只需要实现如下图的简单代码就可以完成一个命令号格式
+&lt;img src=&quot;/img/mobileYY-CommandRoute_code1.jpg&quot; alt=&quot;图片4&quot; /&gt;&lt;br /&gt;
+2.App启动去注册路由动作&lt;br /&gt;
+App启动的时候去调用所有YYURINavigationCenter类的以_UriNavigationCenterResign开头的方法（通过宏定义创建），以完成在YYRouteManager里YYRouteHandlerBlock与命令号的对应关系注册  &lt;br /&gt;
+3.业务方调用YYRouteManager的单例来传入一个命令号&lt;br /&gt;
+传入命令号以及VC和动画参数等，打包这些参数给YYRouteManager，YYRouteManager内部根据此命令号创建路由对象YYRoute，遍历已注册的所有路由关系，创建或使用已创建的命令号格式匹配对象YYRouteMatcher，每一种命令号格式对应一个YYRouteMatcher  &lt;br /&gt;
+4.YYRouteMatcher的匹配操作&lt;br /&gt;
+遍历所有YYRouteMatcher，会先判断传入的命令号是否是标准URL&lt;br /&gt;
+如果不是标准URL，通过YYRouteMatcher对应的命令号格式生成的匹配正则表达式匹配此命令号。
+如果是标准URL，则通过URL规则去匹配命令号，为了兼容旧命令号，如果这里匹配不通过，会当做不标准URL继续尝试匹配。
+直到有YYRouteMatcher可以匹配当前的命令号&lt;br /&gt;
+5.执行该命令号格式对应的block方法&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 01 Mar 2018 08:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/03/01/CommandRoute/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/03/01/CommandRoute/</guid>
+        
+        <category>原创</category>
+        
+        <category>iOS开发</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>mobileYY_Channel-Templatization</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;“PC YY直播间有很多模板，娱乐模板，游戏直播模板，教育模板，交友模板，乱斗模板，抓娃娃模板，回放模板等等，不同的模板有不同的业务，负责不同的功能，手Y的直播间模板化做法也是由此而生”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;直播间的模板化&quot;&gt;直播间的模板化&lt;/h1&gt;
+
+&lt;p&gt;模板自PC YY已有，直播间的模板化本质是根据不同的模板ID，事先定义该模板具有的业务，然后在进频道或者切换频道时加载这个模板，即这些模板具有的业务。 比如开头提到的
+娱乐模板，这是最常用业务最多的一个模板&lt;br /&gt;
+&lt;img src=&quot;/img/mobileYY-Channel-Templatization_entertainment.jpg&quot; alt=&quot;图片1&quot; /&gt;&lt;br /&gt;
+还有游戏模板&lt;br /&gt;
+&lt;img src=&quot;/img/mobileYY-Channel-Templatization_game.jpg&quot; alt=&quot;图片2&quot; /&gt;&lt;br /&gt;
+抓娃娃模板是比较简单，业务量较少的&lt;br /&gt;
+&lt;img src=&quot;/img/mobileYY-Channel-Templatization_crane.jpg&quot; alt=&quot;图片3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;模板化的必要性&lt;/strong&gt; &lt;br /&gt;
+1.受制于不同的业务分类，一个频道可能有多种不同的业务加载和显示&lt;br /&gt;
+2.大部分业务是基于开播业务的，这就要求观众在进频道后就需要知道当前主播的开播类型，低成本的做法是主播一开播就告诉后台一些开播种类相关的参数，观众在进这个频道时拿到这些参数，根据这些参数来加载与当前开播方式相关的业务，而不需要每个观众在进频道后都收到不同的业务后台的不同的广播来告诉加载什么业务&lt;br /&gt;
+3.减少了代码冗余和低效率的使用，大部分情况下A模板是不需要B模板的业务的&lt;br /&gt;
+4.降低了潜在的耦合&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;手Y直播间模板化&lt;/strong&gt; &lt;br /&gt;
+手Y直播间的模板化参照PC YY的模板化的思想，把业务组件独立，在不同的模板里加载&lt;/p&gt;
+
+&lt;p&gt;​
+​&lt;/p&gt;
+&lt;h1 id=&quot;观众端的模板化&quot;&gt;观众端的模板化&lt;/h1&gt;
+&lt;p&gt;这里拿观众端娱乐模板举起一个栗子
+&lt;img src=&quot;/img/mobileYY-Channel-Templatization_audience.png&quot; alt=&quot;图片1&quot; /&gt;
+也可点这里→&lt;a href=&quot;https://www.processon.com/view/link/5aaf7191e4b0d248ffd08dcc&quot;&gt;图&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;大概流程如下：&lt;br /&gt;
+1.根据从外源比如首页拿到的的豆腐块数据拿到topSid,subSid,tpl（PC模板号）,uid,isGame等等信息，构造YYChannelUserInfo   &lt;br /&gt;
+2.传入presentChannelViewControllerWithUserInfo:方法&lt;br /&gt;
+3.创建YYParentChannelViewController父类，并用UINavigationController的子类包裹  &lt;br /&gt;
+4.查找模板类型  &lt;br /&gt;
+5.告诉SDK开始进频道  &lt;br /&gt;
+6.加载指定的模板VC &lt;br /&gt;
+7.加载相应的组件&lt;/p&gt;
+
+&lt;h1 id=&quot;开播端的模板化&quot;&gt;开播端的模板化&lt;/h1&gt;
+&lt;p&gt;开播端相对稍微复杂一点，这里拿普通开播模板举起一个栗子
+&lt;img src=&quot;/img/mobileYY-Channel-Templatization_live.png&quot; alt=&quot;图片2&quot; /&gt;
+也可点这里→&lt;a href=&quot;https://www.processon.com/view/link/5ab0cf8ce4b0e9353394a197&quot;&gt;图&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;开播端会先加载一个可上传标题，封面等的一个预览页，这时候主播已经能看到自己了，点击开播按钮后才正式进入直播间，加载模板&lt;br /&gt;
+&lt;br /&gt;
+大概流程如下：&lt;br /&gt;
+1.从手机开播方式获取到当前的开播模式（普通，轮麦，M直播）  &lt;br /&gt;
+2.传入presentLiveParentViewController:方法&lt;br /&gt;
+3.调p_presentNormalLiveChannelViewController方法  &lt;br /&gt;
+4.创建LiveParentViewController父类  &lt;br /&gt;
+5.记录当前的模板类型  &lt;br /&gt;
+6.用UINavigationController的子类包裹LiveParentViewController &lt;br /&gt;
+7.presentViewController后viewDidLoad&lt;br /&gt;
+8.加载主播音视频层界面
+9.添加预览界面&lt;br /&gt;
+10.点击开播按钮，开始3s倒计时动画界面&lt;br /&gt;
+11.移除预览界面&lt;br /&gt;
+12.创建当前的模板类LiveParentNormalTemplate,模板类再创建LiveChannelViewController，alpha=0，添加在LiveParentViewController上&lt;br /&gt;
+13.同步加载所需的所有组件&lt;br /&gt;
+     在3s结束后，LiveChannelViewController，alpha=1&lt;/p&gt;
+
+&lt;h3 id=&quot;开播模板uml&quot;&gt;开播模板UML&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/mobileYY-Channel-Templatization_liveUML.jpg&quot; alt=&quot;图片3&quot; /&gt;
+开播的核心类是LiveParentViewController。控制着音视频逻辑、业务逻辑（LiveParentTemplate实例）等。
+LiveParentViewController用模板ID（TemplateID）通过LiveParentTemplateFactory实例化指定模板，调用接口化（ILiveParentTemplate）后的模板实例来处理模板逻辑。
+开播业务模板首先需继承LiveParentBaseTemplate基类。然后实现ILiveParentTemplate，协议内各函数在协议类有具体说明。initTemplate、destoryTemplate、excuteTemplateAuth是必须实现的，分别代表初始化、销毁、开播鉴权。业务UIViewController在模板内创建并由模板控制。如LiveParentNormalTemplate模板类创建了LiveChannelViewController。&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 01 Feb 2018 08:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/02/01/Channel-Templatization/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/02/01/Channel-Templatization/</guid>
+        
+        <category>原创</category>
+        
+        <category>iOS开发</category>
+        
+        
+      </item>
     
       <item>
         <title>mobileYY_Channel-Modularization</title>
@@ -36,9 +202,9 @@
 &lt;strong&gt;手Y直播间也需要有频道里业务相关的所有功能：&lt;/strong&gt;&lt;br /&gt;
 1.公屏&lt;br /&gt;
 2.弹幕&lt;br /&gt;
-3.麦序&lt;br /&gt;
+3.麦序列表 &lt;br /&gt;
 4.送礼&lt;br /&gt;
-5.礼物流水&lt;br /&gt;
+5.礼物流水动画&lt;br /&gt;
 6.各种h5玩法（周星周卡,幸运转盘…）&lt;br /&gt;
 7.私聊&lt;br /&gt;
 8.清晰度切换  &lt;br /&gt;
@@ -57,10 +223,11 @@
 9.贴纸（主要在主播端）   &lt;br /&gt;
 10.音乐（主要在主播端）   &lt;br /&gt;
 11.贡献榜&lt;br /&gt;
-12.h5活动条  &lt;br /&gt;
-…&lt;br /&gt;
-​等等，大概有5 60种…
-​
+12.h5活动条&lt;br /&gt;
+… &lt;br /&gt;
+hnmmm…有这么多:
+&lt;img src=&quot;/img/mobileYY-Channel-Modularization_moduleNums.jpg&quot; alt=&quot;图片1&quot; /&gt;&lt;br /&gt;
+组件化主要组件的是频道里的业务相关功能，上图里的每一个ModuleId都对应一个组件。&lt;br /&gt;
 ​&lt;/p&gt;
 &lt;h1 id=&quot;直播间的组件化&quot;&gt;直播间的组件化&lt;/h1&gt;
 &lt;p&gt;手Y的直播间按使用人群分可分为两类，观看端和开播端；按模式分可分为至少三类，麦序模式，主席模式，自由模式；按模板分可分为开播端模板，娱乐模板，游戏模板，抓娃娃模板等等。不同的端，不同的模式，不同的模板，会加载不同的业务；不同的业务，拥有不同的view，各个view之间有业务上的交互，还有view之间的约束依赖。&lt;br /&gt;
@@ -90,7 +257,7 @@
 
 &lt;h3 id=&quot;组件加载&quot;&gt;组件加载&lt;/h3&gt;
 &lt;p&gt;这里拿观众端娱乐模板+麦序模式举起一个栗子
-&lt;img src=&quot;/img/mobileYY-Channel-Modularization.png&quot; alt=&quot;图片1&quot; /&gt;
+&lt;img src=&quot;/img/mobileYY-Channel-Modularization.png&quot; alt=&quot;图片2&quot; /&gt;
 也可点这里→&lt;a href=&quot;https://www.processon.com/view/link/5aafe49be4b0e935339228b5&quot;&gt;图&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;大概流程如下：&lt;br /&gt;
@@ -106,9 +273,13 @@ ModuleFactory中创建YYModuleLoader，设置moduleConstructBlock，并用module
 8.调用p_moduleDidLoad方法，使用module.moduleView设置业务逻辑&lt;br /&gt;
 9.YYChannelModeLoader继续加载，遍历剩下的defaultModuleList，并加载每个moduleId，根据moduleId，从ModuleFactory中取出moduleConstructBlock，从LayoutFactory中取出layoutBlock，从areaFactory中取出areaConstruct，由此构造出完整的组件并添加到直播间view中。&lt;/p&gt;
 
+&lt;h3 id=&quot;一群组件&quot;&gt;一群组件&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/mobileYY-Channel-Modularization_modules.jpg&quot; alt=&quot;图片3&quot; /&gt;
+完成了以上的加载，看下直播间的的hierarchy
+可以看到YYParentChannelViewController下层是YYEChannelTemplateViewController（娱乐模板），YYBaseTemplateView是模板上的View，组件被添加在了三种ContainerView（图没有截全），分别是contentView,ModalView和自身的view。&lt;/p&gt;
+
 &lt;h3 id=&quot;层级关系&quot;&gt;层级关系&lt;/h3&gt;
-&lt;p&gt;上图已有，拿出来再说一下
-&lt;img src=&quot;/img/mobileYY-Channel-Modularization_hierarchy.jpg&quot; alt=&quot;图片2&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/mobileYY-Channel-Modularization_hierarchy.jpg&quot; alt=&quot;图片5&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;ViewController的有三个view，分别是ChannelVC的self.view，self.contentView和self.modalView。默认情况下，组件是加载到contentView中，modalView一般用来显示直播间的弹框等模态的view，而且一些组件比如onlineListModuleView，因为他覆盖在整个直播间上，相当于push了一个新的vc，所以也加载了modalView中。&lt;/p&gt;
 
